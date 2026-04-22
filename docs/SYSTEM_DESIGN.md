@@ -41,3 +41,45 @@ When a user interacts with the system, the data flows as follows:
     * *Route B:* External API (Google Gemini, OpenRouter) via public internet.
     * *Route C:* Remote Oracle Edge Node (via Tailscale tunnel).
 5.  **Automation Trigger:** n8n monitors the environment. If a specific webhook is hit or an LLM logic step requires an action, n8n executes the workflow and logs the state in its internal database.
+
+## 4. Architecture Diagram
+
+```mermaid
+graph TD
+    User([User / Browser])
+
+    subgraph "Laptop-HP (192.168.86.201)"
+        UI[Open WebUI :3002]
+        Automation[n8n :5678]
+        Gateway{LiteLLM Router :4000}
+
+        subgraph "Isolated AI Stack (Docker ai-net)"
+            AIDB[(PostgreSQL + pgvector<br>'openwebui' & 'n8n')]
+            LocalOllama[Ollama<br>Local Models]
+        end
+
+        subgraph "Exposed Edge Stack"
+            EdgeDB[(Edge PostgreSQL<br>'edge_pipeline' :5432)]
+        end
+    end
+
+    subgraph "Cloud / Remote"
+        CloudAPIs((Cloud APIs<br>Gemini / OpenRouter))
+        Oracle[Oracle Edge Node A1<br>via Tailscale]
+    end
+
+    %% Ingress and Routing
+    User -->|Web Access| UI
+    UI -->|API Prompt| Gateway
+    Automation -->|Webhook / API| Gateway
+
+    %% Database Connections
+    UI <-->|Vector RAG / Chat History| AIDB
+    Automation <-->|State / Execution Logs| AIDB
+    ExternalScripts([External Pipelines]) --> EdgeDB
+
+    %% LLM Inferencing
+    Gateway -->|Route: Local| LocalOllama
+    Gateway -->|Route: Remote API| CloudAPIs
+    Gateway -->|Route: Background Tasks| Oracle
+```
