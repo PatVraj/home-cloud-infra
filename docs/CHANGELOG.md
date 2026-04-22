@@ -8,7 +8,7 @@
 - Decoupled Docker Compose configurations from persistent state data.
 - Mapped absolute volume paths for openclaw and edge-db databases to host directories.
 - Secured service .env files in .gitignore.
-- Applied 1GB memory limit to edge-db Postgres container to protect AI resources.
+- Applied 3GB memory limit to edge-db Postgres container to protect AI resources.
 - Updated Terraform OCI provider source to official oracle/oci registry.
 - Upgraded Oracle deployment script to an infinite while-loop with sleep timers.
 - Committed Terraform dependency lock file (.terraform.lock.hcl).
