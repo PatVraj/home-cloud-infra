@@ -1,0 +1,7 @@
+## [2026-04-22] - Initial Setup
+- Created standardized infrastructure repository layout.
+- Added .gitignore to secure Terraform state and secrets.
+- Parameterized Oracle OCI main.tf for subnet, image, and SSH keys.
+- Initialized Git version control.
+- Transitioned Git remote authentication to SSH.
+- Mapped local 192.168.86.x subnet topography in architecture docs.
