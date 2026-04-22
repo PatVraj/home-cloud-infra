@@ -1,0 +1,39 @@
+model_list:
+  #Via OpenRouter API
+  - model_name: nemotron-3-super-free
+    litellm_params:
+      model: openrouter/nvidia/nemotron-3-super-120b-a12b:free
+      api_key: "os.environ/OpenRouter"
+  # The Heavy Lifter (Complex reasoning & coding)
+  - model_name: gemma-4-31b-cloud
+    litellm_params:
+      model: gemini/gemma-4-31b-it
+      api_key: "os.environ/GEMINI_API_KEY"
+
+  # The Fast Automation Agent (500 requests/day)
+  - model_name: gemini-3.1-flash-lite
+    litellm_params:
+      model: gemini/gemini-3.1-flash-lite-preview
+      api_key: "os.environ/GEMINI_API_KEY"
+
+  # The RAG Embedding Engine (1000 requests/day)
+  - model_name: gemini-embedding-2
+    litellm_params:
+      model: gemini/gemini-embedding-2-preview
+      api_key: "os.environ/GEMINI_API_KEY"
+
+  - model_name: gemma-4-e4b
+    litellm_params:
+      model: ollama/gemma4:e4b
+      api_base: http://ollama:11434
+      # We force the sampling parameters Google recommended here
+      temperature: 1.0
+      top_p: 0.95
+
+  - model_name: qwen-3.5-9b
+    litellm_params:
+      model: ollama/qwen3.5:9b
+      api_base: http://ollama:11434
+
+#litellm_settings:
+#  drop_params: true # Strips unsupported API calls so Open WebUI doesn't crash it
