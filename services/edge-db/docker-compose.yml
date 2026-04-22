@@ -11,3 +11,7 @@ services:
       - /home/vraj/edge-db/postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432" # Exposes the DB to the host machine (and Tailscale)
+    deploy:
+      resources:
+        limits:
+          memory: 3G # Prevents edge data from starving the AI models of RAM
