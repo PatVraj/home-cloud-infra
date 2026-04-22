@@ -8,6 +8,6 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: edge_pipeline
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - /home/vraj/edge-db/postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432" # Exposes the DB to the host machine (and Tailscale)

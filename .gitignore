@@ -8,3 +8,4 @@ crash.log
 crash.*.log
 # Ignore any variables files containing credentials
 terraform.tfvars
+.env

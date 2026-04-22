@@ -9,7 +9,7 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - /home/vraj/openclaw/postgres_data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - ai-net
@@ -20,7 +20,7 @@ services:
     restart: unless-stopped
     # Port removed for security. Accessible internally by LiteLLM at http://ollama:11434
     volumes:
-      - ./ollama_data:/root/.ollama
+      - /home/vraj/openclaw/ollama_data:/root/.ollama
     environment:
       - OLLAMA_KEEP_ALIVE=5m
       - OLLAMA_MAX_LOADED_MODELS=1
@@ -58,7 +58,7 @@ services:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/openwebui
       - VECTOR_DB=pgvector
     volumes:
-      - ./webui_data:/app/backend/data
+      - /home/vraj/openclaw/webui_data:/app/backend/data
     depends_on:
       - litellm
       - postgres
@@ -84,7 +84,7 @@ services:
       - DB_POSTGRESDB_USER=${POSTGRES_USER}
       - DB_POSTGRESDB_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
-      - ./n8n_data:/home/node/.n8n
+      - /home/vraj/openclaw/n8n_data:/home/node/.n8n
     depends_on:
       - postgres
     networks:

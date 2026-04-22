@@ -5,3 +5,6 @@
 - Initialized Git version control.
 - Transitioned Git remote authentication to SSH.
 - Mapped local 192.168.86.x subnet topography in architecture docs.
+- Decoupled Docker Compose configurations from persistent state data.
+- Mapped absolute volume paths for openclaw and edge-db databases to host directories.
+- Secured service .env files in .gitignore.
